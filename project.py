@@ -67,7 +67,6 @@ y = jim.create_account()
 # print(f"# of accounts for jim = {len(jim.account)}")
 jim.make_deposit(133, y).make_deposit(133, y).make_deposit(134, y).make_withdrawal(13, y).display_user_balance(y)
 
-
 jake = User("Jake")
 jake.create_account()
 jake.make_deposit(50, 0).make_deposit(51, 0).make_withdrawal(1, 0).make_withdrawal(1, 0).display_user_balance(0)
