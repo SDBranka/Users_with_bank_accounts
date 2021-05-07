@@ -1,33 +1,3 @@
-# for this assignment, our User class will no longer have a self.account_balance 
-# attribute. Instead, we will replace this attribute's value in our __init__ method 
-# with an instance of a BankAccount, and use the name of self.account. That means our
-# make_deposit (and other methods referencing self.account_balance) need to be updated!
-# That's the goal of this assignment.
-
-# Remember in our User methods, we are going to now be accessing the BankAccount class through our self.account attribute, like so:
-# class User:
-#     def example_method(self):
-#         self.account.deposit(100)		# we can call the BankAccount instance's methods
-#     	print(self.account.balance)		# or access its attributes
-
-# Make sure that by the end of this assignment that you:
-#     have both the User and BankAccount classes in the same file for your assignment
-#     only create BankAccount instances inside of the User's __init__ method
-#     only call BankAccount methods inside of the methods in the User class
-
-
-# 1. Update the User class __init__ method
-
-# 2. Update the User class make_deposit method
-
-# 3. Update the User class make_withdrawal method
-
-# 4. Update the User class display_user_balance method
-
-# SENSEI BONUS: Allow a user to have multiple accounts; update methods so the user
-#  has to specify which account they are withdrawing or depositing to
-
-
 class User:
     def __init__(self, name):
         self.name = name
@@ -42,7 +12,7 @@ class User:
         return self
 
     def display_user_balance(self, num):
-        print(f"User Name: {self.name}\nAccount Balance: ${self.account[num].balance}")
+        print(f"User Name: {self.name}\nBalance in Account {num}: ${self.account[num].balance}")
         return self
     
     def transfer_money(self, other_user, amount, num1, num2):
@@ -102,6 +72,4 @@ john.make_deposit(72, 0).make_withdrawal(3, 0).make_withdrawal(6, 0).make_withdr
 jim.transfer_money(john, 18, 0, 0)
 jim.display_user_balance(0)
 john.display_user_balance(0)
-
-
 
