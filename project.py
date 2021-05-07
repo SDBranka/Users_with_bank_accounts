@@ -24,20 +24,43 @@
 
 # 4. Update the User class display_user_balance method
 
-# SENSEI BONUS: Allow a user to have multiple accounts; update methods so the user has to specify which account they are withdrawing or depositing to
+# SENSEI BONUS: Allow a user to have multiple accounts; update methods so the user
+#  has to specify which account they are withdrawing or depositing to
 
 
 class User:
     def __init__(self, name):
         self.name = name
-        self.account = BankAccount(balance = 0, interest = 0.01)
+        self.account = []  
 
-    def display_user_balance(self):
-        print(f"User Name: {self.name}\nAccount Balance: ${self.account.balance}")
+    def make_deposit(self, amount, num):             #increases the account balance by the given amount
+        self.account[num].make_deposit(amount)
         return self
 
+    def make_withdrawal(self, amount, num):          #decreases the account balance by the given amount or prints a message and deduct $5
+        self.account[num].make_withdrawal(amount)
+        return self
+
+    def display_user_balance(self, num):
+        print(f"User Name: {self.name}\nAccount Balance: ${self.account[num].balance}")
+        return self
+    
+    def transfer_money(self, other_user, amount, num1, num2):
+        self.account[num1].make_withdrawal(amount)
+        other_user.account[num2].make_deposit(amount)
+
+    def yield_interest(self, num):           #increases the account balance by the current balance * the interest rate (as long as the balance is positive)
+        if self.account[num].balance > 0:
+            self.account[num].balance += self.account[num].interest * self.account[num].balance 
+        return self
+
+    def create_account(self, balance = 0, interest = 0.01):
+        self.account.append(BankAccount(balance, interest))
+        return self
+
+
 class BankAccount:
-    def __init__(self, balance, interest):
+    def __init__(self, balance = 0, interest= 0.01):
         self.balance = balance
         self.interest = interest
 
@@ -56,25 +79,29 @@ class BankAccount:
     def transfer_money(self, other_user, amount):
         self.balance -= amount
         other_user.account.balance += amount
+        return self
 
     def yield_interest(self):           #increases the account balance by the current balance * the interest rate (as long as the balance is positive)
         if self.balance > 0:
-            self.balance += self.interest *self.balance 
+            self.balance += self.interest * self.balance 
         return self
 
 
 jim = User("Jim")
-jim.account.make_deposit(133).make_deposit(133).make_deposit(134).make_withdrawal(13)
-jim.display_user_balance()
+jim.create_account()
+jim.make_deposit(133, 0).make_deposit(133, 0).make_deposit(134, 0).make_withdrawal(13, 0).display_user_balance(0)
 
 jake = User("Jake")
-jake.account.make_deposit(50).make_deposit(51).make_withdrawal(1).make_withdrawal(1)
-jake.display_user_balance()
+jake.create_account()
+jake.make_deposit(50, 0).make_deposit(51, 0).make_withdrawal(1, 0).make_withdrawal(1, 0).display_user_balance(0)
 
 john = User("John")
-john.account.make_deposit(72).make_withdrawal(3).make_withdrawal(6).make_withdrawal(9)
-john.display_user_balance()
+john.create_account()
+john.make_deposit(72, 0).make_withdrawal(3, 0).make_withdrawal(6, 0).make_withdrawal(9, 0).display_user_balance(0)
 
-jim.account.transfer_money(john, 18)
-jim.display_user_balance()
-jake.display_user_balance()
+jim.transfer_money(john, 18, 0, 0)
+jim.display_user_balance(0)
+john.display_user_balance(0)
+
+
+
