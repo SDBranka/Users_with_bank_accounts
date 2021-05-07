@@ -26,7 +26,7 @@ class User:
 
     def create_account(self, balance = 0, interest = 0.01):
         self.account.append(BankAccount(balance, interest))
-        return self
+        return len(self.account)-1
 
 
 class BankAccount:
@@ -58,8 +58,15 @@ class BankAccount:
 
 
 jim = User("Jim")
-jim.create_account()
-jim.make_deposit(133, 0).make_deposit(133, 0).make_deposit(134, 0).make_withdrawal(13, 0).display_user_balance(0)
+x = jim.create_account()
+# print(f"x = {x}")
+# print(f"# of accounts for jim = {len(jim.account)}")
+jim.make_deposit(133, x).make_deposit(133, x).make_deposit(134, x).make_withdrawal(13, x).display_user_balance(x)
+y = jim.create_account()
+# print(f"y = {y}")
+# print(f"# of accounts for jim = {len(jim.account)}")
+jim.make_deposit(133, y).make_deposit(133, y).make_deposit(134, y).make_withdrawal(13, y).display_user_balance(y)
+
 
 jake = User("Jake")
 jake.create_account()
