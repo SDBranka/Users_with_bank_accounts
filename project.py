@@ -79,3 +79,5 @@ jim.transfer_money(john, 18, 0, 0)
 jim.display_user_balance(0)
 john.display_user_balance(0)
 
+jim.yield_interest(0).display_user_balance(0)
+
