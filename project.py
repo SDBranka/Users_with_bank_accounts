@@ -24,8 +24,8 @@ class User:
             self.account[num].balance += self.account[num].interest * self.account[num].balance 
         return self
 
-    def create_account(self, balance = 0, interest = 0.01):
-        self.account.append(BankAccount(balance, interest))
+    def create_account(self):
+        self.account.append(BankAccount())
         return len(self.account)-1
 
 
